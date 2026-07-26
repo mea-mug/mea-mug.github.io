@@ -1,0 +1,34 @@
+# =====================================================================
+#  Files git must never commit.
+#  Anything in this folder that is NOT listed here will be published.
+# =====================================================================
+
+# ---------------------------------------------------------------------
+#  YOUR PASSWORD FILE - THIS IS THE IMPORTANT ONE.
+#  my-github-details.txt holds your GitHub token. The rule below keeps
+#  it on your PC and out of GitHub, forever. Never delete these two lines.
+#  The * also covers near-miss names such as "my-github-details.txt.txt"
+#  or "my-github-details - Copy.txt".
+#  The second line is what lets the blank EXAMPLE template - which holds
+#  no secrets - stay in the project, so you always have a fresh copy.
+# ---------------------------------------------------------------------
+my-github-details*
+!my-github-details.EXAMPLE.txt
+
+# Local build output. Only appears if the build script is run by hand;
+# the live site is built fresh by GitHub Actions on every push.
+_site/
+
+# Python's compiled-bytecode cache. Appears whenever the build script runs on your PC.
+__pycache__/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local AI-agent tooling. Not part of the website.
+_bmad/
+_bmad-chain-ext/
+_bmad-output/
+.claude/

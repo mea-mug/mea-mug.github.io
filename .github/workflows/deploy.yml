@@ -1,0 +1,66 @@
+name: Publish the website to GitHub Pages
+
+# Runs automatically on every push to your main branch -- which is exactly what
+# double-clicking the publish script does for you. You can also start it by hand
+# from the repository's "Actions" tab ("Run workflow").
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+# contents:write lets this workflow commit the refreshed README.md back to your repo.
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# If you publish twice in quick succession, cancel the older run and keep the newest.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH: ${{ github.ref_name }}
+    steps:
+      - name: Check out your files
+        uses: actions/checkout@v4
+
+      # This step runs on GitHub's Linux machines, where the command is "python3".
+      # On your own Windows PC the same script is run with "python" instead.
+      - name: Build the site and refresh the README link list
+        run: python3 scripts/build_index.py html_files _site unlisted
+
+      # If this step cannot push (a brand-new account defaults GitHub's built-in
+      # token to read-only), we do NOT want the whole publish to fail over a
+      # link list. The site still deploys; only README.md stays stale.
+      - name: Commit the updated README (only if it changed)
+        continue-on-error: true
+        run: |
+          if [ -n "$(git status --porcelain README.md)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "Update page list [skip ci]"
+            git push origin "HEAD:$BRANCH"
+          else
+            echo "README unchanged -- nothing to commit."
+          fi
+
+      - name: Upload the built site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
