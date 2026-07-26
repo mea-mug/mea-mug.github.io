@@ -479,69 +479,114 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 /* One narrow column, centred. Nothing to fill in — just ways to reach a person. */
 .contact-page { max-width: 640px; }
 
-/* The two primary routes, as large tap targets */
-.contact-primary {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-  margin-bottom: 1.6rem;
-}
-@media (max-width: 560px) { .contact-primary { grid-template-columns: 1fr; } }
-
-.contact-big {
-  display: flex; flex-direction: column; align-items: center; gap: .25rem;
-  padding: 1.7rem 1.2rem;
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  text-align: center; color: var(--text);
-  transition: transform var(--t), border-color var(--t), box-shadow var(--t);
-}
-.contact-big:hover {
-  transform: translateY(-3px); border-color: var(--accent);
-  box-shadow: var(--shadow-lg); color: var(--text);
-}
-.contact-big-ico { font-size: 1.7rem; line-height: 1; margin-bottom: .4rem; }
-.contact-big-label {
-  font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted);
-}
-.contact-big-value {
-  font-size: 1.02rem; font-weight: 700; color: var(--accent); word-break: break-word;
+/* ---- The business card ------------------------------------------------
+   Portrait and name on a tinted header, then one tappable row per channel.
+   Each row carries its own --brand colour, used on hover and focus.
+   ---------------------------------------------------------------------- */
+.vcard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
 }
 
-/* Secondary detail rows */
-.contact-list {
-  list-style: none; display: flex; flex-direction: column;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: .3rem 1.3rem;
+.vcard-top {
+  position: relative;
+  padding: 2.4rem 1.6rem 1.8rem;
+  text-align: center;
+  background:
+    radial-gradient(120% 140% at 50% -30%, var(--accent-glow), transparent 62%),
+    var(--surface-2);
+  border-bottom: 1px solid var(--border);
 }
-.contact-list li {
-  display: flex; align-items: center; gap: .95rem;
-  padding: .95rem 0; border-bottom: 1px solid var(--border);
+.vcard-photo {
+  width: 104px; height: 104px; border-radius: 50%; object-fit: cover;
+  margin: 0 auto .95rem; display: block;
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 3px var(--accent), var(--shadow);
 }
-.contact-list li:last-child { border-bottom: 0; }
-.contact-ico {
-  width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--radius-sm);
+.vcard-name { font-size: clamp(1.3rem, 3vw, 1.6rem); margin-bottom: .2rem; }
+.vcard-role { font-size: .93rem; color: var(--text-soft); }
+.vcard-place {
+  display: inline-flex; align-items: center; gap: .4rem;
+  margin-top: .9rem; padding: .34rem .85rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 100px;
+  font-size: .8rem; color: var(--muted);
+}
+
+.vcard-links { list-style: none; }
+.vcard-links li + li { border-top: 1px solid var(--border); }
+
+.vcard-links a {
+  display: flex; align-items: center; gap: 1rem;
+  padding: .95rem 1.4rem;
+  color: var(--text); position: relative;
+  transition: background var(--t-fast), padding-inline-start var(--t-fast);
+}
+/* the brand colour bar that slides in on hover */
+.vcard-links a::before {
+  content: ''; position: absolute; inset-block: 0; inset-inline-start: 0;
+  width: 3px; background: var(--brand, var(--accent));
+  transform: scaleY(0); transition: transform var(--t-fast);
+}
+.vcard-links a:hover, .vcard-links a:focus-visible {
+  background: var(--surface-2); color: var(--text);
+  padding-inline-start: 1.7rem;
+}
+.vcard-links a:hover::before, .vcard-links a:focus-visible::before { transform: scaleY(1); }
+
+.vcard-ico {
+  width: 42px; height: 42px; flex-shrink: 0; border-radius: 11px;
+  display: grid; place-items: center;
   background: var(--surface-2); border: 1px solid var(--border);
-  display: grid; place-items: center; font-size: 1rem;
+  color: var(--text-soft);
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
 }
-.contact-meta { display: flex; flex-direction: column; line-height: 1.4; min-width: 0; }
-.contact-meta > span {
-  font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted);
+.vcard-ico svg { width: 20px; height: 20px; display: block; }
+.vcard-links a:hover .vcard-ico, .vcard-links a:focus-visible .vcard-ico {
+  background: var(--brand, var(--accent));
+  border-color: var(--brand, var(--accent));
+  color: #fff;
 }
-.contact-meta a, .contact-meta strong {
-  font-size: .98rem; font-weight: 600; color: var(--text); word-break: break-word;
+/* X's brand colour is near-black, which disappears in dark mode */
+:root:not([data-theme="light"]) .vcard-links a[href*="x.com"]:hover .vcard-ico,
+:root:not([data-theme="light"]) .vcard-links a[href*="x.com"]:focus-visible .vcard-ico {
+  background: #fff; border-color: #fff; color: #000;
 }
-.contact-meta a:hover { color: var(--accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .vcard-links a[href*="x.com"]:hover .vcard-ico {
+    background: #fff; border-color: #fff; color: #000;
+  }
+}
 
-/* Who you are actually writing to */
-.contact-person {
-  display: flex; align-items: center; gap: 1.1rem;
-  margin-top: 1.6rem; padding: 1.3rem;
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+.vcard-meta { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; flex: 1; }
+.vcard-net {
+  font-size: .71rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted);
 }
-.contact-person img {
-  width: 76px; height: 76px; border-radius: 50%; object-fit: cover;
-  flex-shrink: 0; border: 2px solid var(--accent);
+.vcard-handle {
+  font-size: .97rem; font-weight: 600; color: var(--text);
+  overflow-wrap: anywhere;
 }
-.contact-person strong { display: block; font-size: 1.05rem; }
-.contact-person span { font-size: .88rem; color: var(--muted); }
+
+.vcard-go {
+  flex-shrink: 0; color: var(--muted); font-size: 1.05rem;
+  opacity: 0; transform: translateX(-6px);
+  transition: opacity var(--t-fast), transform var(--t-fast);
+}
+[dir="rtl"] .vcard-go { transform: scaleX(-1) translateX(-6px); }
+.vcard-links a:hover .vcard-go, .vcard-links a:focus-visible .vcard-go {
+  opacity: 1; transform: translateX(0); color: var(--brand, var(--accent));
+}
+[dir="rtl"] .vcard-links a:hover .vcard-go,
+[dir="rtl"] .vcard-links a:focus-visible .vcard-go { transform: scaleX(-1) translateX(0); }
+
+@media (max-width: 460px) {
+  .vcard-links a { padding-inline: 1.05rem; gap: .8rem; }
+  .vcard-links a:hover, .vcard-links a:focus-visible { padding-inline-start: 1.3rem; }
+  .vcard-ico { width: 38px; height: 38px; }
+  .vcard-handle { font-size: .9rem; }
+}
 
 /* ---------- 11. Footer ------------------------------------------------------ */
 .site-footer {
