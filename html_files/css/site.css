@@ -291,6 +291,12 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 }
 .hero h1 { margin-bottom: 1.1rem; }
 .hero .lead { margin-bottom: 1.8rem; max-width: 46ch; }
+/* In a centred heading block that 46ch box must be centred too, or the text
+   reads as centred inside a box that is itself sitting on the left. */
+.section-head.center .lead,
+.section-head.center p { margin-inline: auto; }
+/* A hero holding nothing but its heading block needs no trailing gap. */
+.hero .section-head:only-child { margin-bottom: 0; }
 
 .hero-media { position: relative; }
 .hero-media img {
@@ -372,6 +378,13 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 .prose h3:first-child { margin-top: 0; }
 
 /* ---------- 8. Equipment catalogue ---------------------------------------- */
+/* Modest centred label sitting above a control row */
+.section-sub {
+  text-align: center; font-size: 1.05rem; font-weight: 600;
+  color: var(--muted); letter-spacing: .01em;
+  margin-bottom: 1.1rem;
+}
+
 .filter-bar {
   display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
   margin-bottom: 2.2rem;
@@ -598,9 +611,11 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
   margin-bottom: 2.4rem;
 }
 @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; } }
-.footer-grid h4 {
+/* h2 rather than h4: the footer is its own landmark, and jumping straight
+   from h2 to h4 would leave a gap in the heading outline. */
+.footer-grid h2 {
   font-size: .78rem; letter-spacing: .13em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: .95rem;
+  color: var(--muted); margin-bottom: .95rem; font-weight: 700;
 }
 .footer-links { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
 .footer-links a { color: var(--text-soft); font-size: .92rem; }
