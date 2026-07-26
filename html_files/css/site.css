@@ -475,28 +475,45 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
-/* ---------- 10. Forms ------------------------------------------------------ */
-.form { display: flex; flex-direction: column; gap: 1.05rem; }
-.field { display: flex; flex-direction: column; gap: .4rem; }
-.field label { font-size: .85rem; font-weight: 600; color: var(--text-soft); }
-.field .req { color: var(--accent); }
-.field input, .field textarea {
-  padding: .85rem 1rem; border-radius: var(--radius-sm);
-  border: 1.5px solid var(--border); background: var(--bg-alt); color: var(--text);
-  font-family: inherit; font-size: .95rem; outline: none;
-  transition: border-color var(--t-fast), box-shadow var(--t-fast);
-}
-.field input:focus, .field textarea:focus {
-  border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
-}
-.field textarea { resize: vertical; min-height: 140px; }
-.form-note { font-size: .82rem; color: var(--muted); }
+/* ---------- 10. Contact ----------------------------------------------------- */
+/* One narrow column, centred. Nothing to fill in — just ways to reach a person. */
+.contact-page { max-width: 640px; }
 
-/* Contact detail rows */
-.contact-list { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+/* The two primary routes, as large tap targets */
+.contact-primary {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-bottom: 1.6rem;
+}
+@media (max-width: 560px) { .contact-primary { grid-template-columns: 1fr; } }
+
+.contact-big {
+  display: flex; flex-direction: column; align-items: center; gap: .25rem;
+  padding: 1.7rem 1.2rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  text-align: center; color: var(--text);
+  transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+}
+.contact-big:hover {
+  transform: translateY(-3px); border-color: var(--accent);
+  box-shadow: var(--shadow-lg); color: var(--text);
+}
+.contact-big-ico { font-size: 1.7rem; line-height: 1; margin-bottom: .4rem; }
+.contact-big-label {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted);
+}
+.contact-big-value {
+  font-size: 1.02rem; font-weight: 700; color: var(--accent); word-break: break-word;
+}
+
+/* Secondary detail rows */
+.contact-list {
+  list-style: none; display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: .3rem 1.3rem;
+}
 .contact-list li {
-  display: flex; align-items: flex-start; gap: .95rem;
-  padding: .9rem 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: .95rem;
+  padding: .95rem 0; border-bottom: 1px solid var(--border);
 }
 .contact-list li:last-child { border-bottom: 0; }
 .contact-ico {
@@ -505,15 +522,26 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
   display: grid; place-items: center; font-size: 1rem;
 }
 .contact-meta { display: flex; flex-direction: column; line-height: 1.4; min-width: 0; }
-.contact-meta span { font-size: .74rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); }
-.contact-meta a, .contact-meta strong { font-size: .98rem; font-weight: 600; color: var(--text); word-break: break-word; }
+.contact-meta > span {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted);
+}
+.contact-meta a, .contact-meta strong {
+  font-size: .98rem; font-weight: 600; color: var(--text); word-break: break-word;
+}
 .contact-meta a:hover { color: var(--accent); }
 
-.map-frame {
-  border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
-  box-shadow: var(--shadow); background: var(--surface-2);
+/* Who you are actually writing to */
+.contact-person {
+  display: flex; align-items: center; gap: 1.1rem;
+  margin-top: 1.6rem; padding: 1.3rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
 }
-.map-frame iframe { width: 100%; height: 340px; border: 0; display: block; filter: saturate(.9); }
+.contact-person img {
+  width: 76px; height: 76px; border-radius: 50%; object-fit: cover;
+  flex-shrink: 0; border: 2px solid var(--accent);
+}
+.contact-person strong { display: block; font-size: 1.05rem; }
+.contact-person span { font-size: .88rem; color: var(--muted); }
 
 /* ---------- 11. Footer ------------------------------------------------------ */
 .site-footer {

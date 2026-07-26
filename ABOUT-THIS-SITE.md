@@ -19,7 +19,7 @@ Six pages, in `html_files`:
 | `services.html` | `/services` | The five service lines, then study → supervise → execute → advise |
 | `equipment.html` | `/equipment` | 32 machines in 6 filterable families, click any photo to enlarge |
 | `projects.html` | `/projects` | Photo gallery: workshop, machines built, on site, studies |
-| `contact.html` | `/contact` | Form, direct details, map |
+| `contact.html` | `/contact` | Direct ways to reach you. No form, no map |
 
 Shared files: `css/site.css` (all styling) and `js/site.js` (all behaviour). Change a
 colour or a heading style once in `site.css` and every page follows.
@@ -55,8 +55,6 @@ Change **all three** — `data-en`, `data-ar`, and the visible text between the 
 visible text is what shows before the script runs and what search engines read, so it
 must match `data-en`.
 
-Form placeholders use `data-ph-en` / `data-ph-ar` the same way.
-
 ---
 
 ## Changing the contact details
@@ -70,22 +68,25 @@ They appear in the footer of all six pages plus the contact page, so use your ed
 | phone link | `tel:+491774648243` |
 | phone shown | `+49 177 464 8243` |
 | Facebook | `facebook.com/ingenieurwesen.industrie.7` |
-| map coordinates | `24.6261945,46.8096092` |
+| Skype | `mea_said` |
 
-**There is no street address anywhere on the site** — only a map pin, as you asked. If you
-want to add one later, the contact page has a "Workshop & factory" row ready for it.
+**There is no address and no map anywhere on the site.** The only location statement is
+"Based in Germany", which appears on the contact page and in the footer of every page.
 
 ---
 
-## The contact form
+## No contact form — on purpose
 
-The site is plain files with no server, so the form opens the visitor's own e-mail app with
-everything filled in and addressed to `info@mea-mug.com`. That works everywhere, costs
-nothing, and needs no account.
+You did not want a form that opens the visitor's e-mail app, so there is none. The contact
+page offers the e-mail address and the phone number as two large buttons, plus Skype and
+Facebook underneath. On a phone, tapping them starts a mail draft or dials directly.
 
-To receive submissions in your inbox instead, make a free account at
-<https://web3forms.com> and follow the instructions in the comment at the bottom of
-`html_files/js/site.js` (section 8). It is about three lines of change.
+That also means there is nothing on the site that can silently break: no form endpoint, no
+third-party service, no spam to filter.
+
+If you ever do want a real form that lands in your inbox, the usual free option is
+<https://web3forms.com>. It needs a `<form>` block on the contact page and one hidden key
+field — ask and it can be added back.
 
 ---
 
@@ -129,9 +130,13 @@ You asked me to fix these, so for the record:
 - **"Supplyer" → "Supplier"**, **"PROQUREMENT" → "Procurement"**, **"Alumnim" → "Aluminium"**,
   and **"concrete patch plants" → "batch plants"**.
 - **"Gulf Experts" is gone.** The old About text switched to that name mid-paragraph, which
-  read like leftover template copy. Everything now says **MEA** consistently, with
-  **SALWA A. AL-SALEH Est.** named as the registered entity in the footer and on the contact
-  page. That keeps one public brand and one legal name, which is the clearest option.
+  read like leftover template copy. Everything now says **MEA** consistently.
+- **"SALWA A. AL-SALEH Est." is gone** from every page, since that establishment is no
+  longer valid. MEA is now the only name on the site.
+- **Saudi Arabia and Riyadh are gone.** The site says **Based in Germany**. The About page
+  now refers to the old factory in the past tense, so the workshop photos still make sense
+  without claiming you are still there. The workshop-signboard photo was removed from
+  Projects because the sign carries the old establishment's name.
 - **One e-mail instead of six**, one phone number instead of two sets.
 - **The three "Our Vision / Our Services / Our Solutions" pictures were scans of text.**
   Their content is now real text on the Home and Services pages, so it can be read on a
@@ -143,8 +148,8 @@ You asked me to fix these, so for the record:
 
 ## Before you publish
 
-- Decide whether `info@mea-mug.com` exists yet. If not, create it, or the form and every
-  e-mail link go nowhere.
+- Decide whether `info@mea-mug.com` exists yet. If not, create it, or every e-mail link
+  on the site goes nowhere.
 - Re-read the Home and About copy in your own voice — it is faithful to the old site, but
   the old site's English was rough in places and I have only tidied it, not rewritten it.
 - Have a native Arabic reader skim the Arabic. I based it on your original Arabic where the

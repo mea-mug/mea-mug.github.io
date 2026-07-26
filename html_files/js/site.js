@@ -9,7 +9,6 @@
      5. Scroll reveal + sticky-header shadow + back-to-top
      6. Equipment filtering
      7. Lightbox for photos
-     8. Contact form
    ========================================================================== */
 (function () {
   'use strict';
@@ -260,43 +259,4 @@
     });
   }
 
-  /* ---------- 8. Contact form ------------------------------------------------
-     The site is a set of static files, so there is no server to receive a
-     form. This opens the visitor's own mail app with everything filled in,
-     which works everywhere with no account and no monthly fee.
-
-     To collect submissions in your inbox instead, make a free account at
-     https://web3forms.com , then:
-       - put <input type="hidden" name="access_key" value="YOUR-KEY"> in the form
-       - set the form's action to https://api.web3forms.com/submit and method to POST
-       - delete the block below
-     -------------------------------------------------------------------------- */
-  var form = document.querySelector('[data-mailto-form]');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var to = form.getAttribute('data-mailto-form');
-      var get = function (n) {
-        var f = form.querySelector('[name="' + n + '"]');
-        return f ? f.value.trim() : '';
-      };
-      var name = get('name'), email = get('email');
-      var subject = get('subject') || 'Website enquiry';
-      var message = get('message');
-
-      var body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
-      window.location.href = 'mailto:' + to +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-
-      var note = form.querySelector('.form-status');
-      if (note) {
-        var ar = document.documentElement.getAttribute('lang') === 'ar';
-        note.textContent = ar
-          ? 'يتم الآن فتح برنامج البريد لديك…'
-          : 'Opening your email app…';
-        note.style.color = 'var(--success)';
-      }
-    });
-  }
 })();
