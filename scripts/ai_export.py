@@ -3,7 +3,7 @@
 
 Run it with EXPORT-FOR-AI.bat. Nothing here changes the website.
 """
-import os, sys, io, glob
+import os, sys, io, re, glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES = os.path.join(ROOT, 'html_files')
@@ -155,6 +155,22 @@ manufacture, supply and consultancy.
       'Thumbnails are not listed individually — every full-size file below has one at '
       'the same name inside its folder\'s `thumbs/`.\n')
 
+    # Which pictures are already referenced by a page?
+    used = set()
+    rx = re.compile(r'(?:src|href|data-full|content)\s*=\s*"([^"]*?/images/[^"]+)"', re.I)
+    for p in text_files:
+        if p.endswith('.html'):
+            for u in rx.findall(io.open(p, encoding='utf-8').read()):
+                used.add(u.split('#')[0].split('?')[0].lstrip('/'))
+
+    unused = [a for a in full
+              if rel(a).replace('html_files/', '') not in used]
+    if unused:
+        A('\n> **%d picture(s) below are marked NOT YET USED.** They sit in the folder but no '
+          'page shows them. If the owner asks you to add a photo, these are almost certainly '
+          'the ones they just put there — use them rather than inventing a filename.\n'
+          % len(unused))
+
     by_dir = {}
     for a in full:
         by_dir.setdefault(os.path.dirname(rel(a)), []).append(a)
@@ -169,7 +185,9 @@ manufacture, supply and consultancy.
                 except Exception:
                     pass
             kb = os.path.getsize(a) / 1024.0
-            A('- `/%s` (%.0f KB%s)' % (rel(a).replace('html_files/', ''), kb, dims))
+            web = rel(a).replace('html_files/', '')
+            flag = '  **← NOT YET USED**' if web not in used else ''
+            A('- `/%s` (%.0f KB%s)%s' % (web, kb, dims, flag))
     A('\n_%d thumbnails also exist and are managed automatically._' % len(thumbs))
 
     # ---------------- source ----------------

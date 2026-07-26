@@ -90,6 +90,53 @@ field — ask and it can be added back.
 
 ---
 
+## The admin page — start here
+
+Double-click **`ADMIN.bat`**. A control panel opens in your browser with two tabs.
+
+### Workspace
+
+At the top, one line tells you **what to do next** — it reads your actual site, so it
+says things like *"5 changes not published yet"*, *"13 photos not used on any page"*, or
+*"Everything is live and up to date"*. When there is an obvious next move, the button to
+do it sits right there.
+
+Under that, five figures: pages, photos (and how many are unused), changes waiting to be
+published, whether every link resolves, and when you last published. Anything needing
+attention turns amber or red.
+
+Then the three steps — **build the prompt**, **apply the reply**, **review and publish** —
+and a timeline of what you have done recently.
+
+Results are shown as a list of what actually changed:
+
+    CREATED   html_files/zz-test.html
+    UPDATED   html_files/contact.html
+    ADDED     /images/equipment/41-pipe-bender.jpg    white border trimmed
+
+The raw output is still there, folded away under "Full output", if you want it.
+
+### Photos
+
+Drag pictures in, choose which part of the site they belong to, and they are trimmed,
+resized and thumbnailed on the way in. The gallery below shows every photo with its
+section and size; ones no page uses are flagged **unused**, and there is a filter to show
+only those. Hover any photo for a delete button — the copy goes to `_ai-backups` first.
+
+### Safety
+
+It refuses to start unless `my-github-details.txt` exists and all four values are filled
+in. Your token is never loaded into the admin program, never sent to the browser and never
+logged — publishing is handed to `PUBLISH.bat`, which reads the credentials itself. The
+page is bound to this computer only, on a port chosen at startup, and every action needs a
+one-time password generated when it launches. Close the black window to shut it down.
+
+### The individual buttons still work
+
+`EXPORT-FOR-AI.bat` and `IMPORT-FROM-AI.bat` are unchanged if you ever prefer them.
+
+---
+
 ## Editing the site with an AI chat
 
 Two buttons do the whole job. You never have to work out which files to send.
