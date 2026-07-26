@@ -3,15 +3,15 @@
      The setup guide you are looking for is START-HERE.md. -->
 # My pages
 
-🌐 **Live site:** ./
+🌐 **Live site:** https://mea-mug.github.io/
 
 **5** pages:
 
-- [about](about/)
-- [contact](contact/)
-- [equipment](equipment/)
-- [projects](projects/)
-- [services](services/)
+- [about](https://mea-mug.github.io/about/)
+- [contact](https://mea-mug.github.io/contact/)
+- [equipment](https://mea-mug.github.io/equipment/)
+- [projects](https://mea-mug.github.io/projects/)
+- [services](https://mea-mug.github.io/services/)
 
 ---
 
