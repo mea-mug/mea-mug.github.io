@@ -310,6 +310,9 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
   display: flex; align-items: center; gap: .8rem;
 }
 .hero-badge strong { font-size: 1.5rem; color: var(--accent); line-height: 1; }
+/* A word in the slot a numeral usually occupies needs to be smaller so it
+   does not wrap or push the box wider. */
+.hero-badge strong.word { font-size: 1.15rem; line-height: 1.15; }
 .hero-badge span { font-size: .78rem; color: var(--muted); line-height: 1.3; }
 
 @media (max-width: 860px) {
@@ -326,6 +329,7 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 }
 .stat { background: var(--surface); padding: 1.5rem 1.2rem; text-align: center; }
 .stat b { display: block; font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--accent); line-height: 1.1; }
+.stat b.word { font-size: clamp(1.15rem, 2.2vw, 1.5rem); line-height: 1.25; }
 .stat span { font-size: .82rem; color: var(--muted); }
 
 /* ---------- 7. Cards & grids ---------------------------------------------- */
