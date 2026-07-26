@@ -32,3 +32,10 @@ _bmad/
 _bmad-chain-ext/
 _bmad-output/
 .claude/
+
+# Working files for the AI edit loop. These are yours alone: the prompt is
+# rebuilt whenever you export, the response is whatever you last pasted in,
+# and the backups are your undo history. None of it belongs on the website.
+AI-PROMPT.md
+AI-RESPONSE.md
+_ai-backups/

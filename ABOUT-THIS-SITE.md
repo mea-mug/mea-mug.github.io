@@ -90,6 +90,55 @@ field — ask and it can be added back.
 
 ---
 
+## Editing the site with an AI chat
+
+Two buttons do the whole job. You never have to work out which files to send.
+
+**1. Double-click `EXPORT-FOR-AI.bat`.** It writes `AI-PROMPT.md`, containing every page,
+the stylesheet, the script, a list of all your photos, and the rules the AI has to follow.
+About 170 KB — well within what any current AI chat accepts.
+
+**2. Open `AI-PROMPT.md`, select all, copy, paste into the AI chat.** Then at the bottom,
+before you send, type what you want. Plain English is fine:
+
+> On the contact page change my title to Senior Mechanical Engineer.
+
+> Add a machine to the equipment page called Pipe Bender, in the Machine tools family,
+> using this photo: C:\Users\Otaku\Pictures\bender.jpg
+
+> The Arabic on the About page reads awkwardly in the second paragraph. Improve it.
+
+**3. Copy the AI's whole reply into `AI-RESPONSE.md` and save.** No tidying needed —
+anything outside the markers is ignored, so its chatter does no harm.
+
+**4. Double-click `IMPORT-FROM-AI.bat`.** It applies the changes, rebuilds the site, and
+checks every link and picture still resolves.
+
+Then preview, and if you are happy, `PUBLISH.bat`.
+
+### What protects you
+
+- **Everything is backed up first.** Each import copies the files it is about to touch
+  into `_ai-backups\<date and time>\`. To undo, copy them back.
+- **Truncated replies are refused.** The commonest AI failure is abbreviating a long file
+  with "...rest unchanged...". The importer spots that, and also spots a file that
+  suddenly shrinks, and applies **nothing** rather than half-applying.
+- **Nothing is deleted unless the AI says so explicitly.** No guessing about unused files.
+- **Photos are processed on the way in.** White borders trimmed, capped at 1600 px, and a
+  thumbnail generated, so new pictures match the ones already there.
+- **Paths are checked.** Nothing can be written outside this folder.
+
+### If the import refuses
+
+It names the file that looked wrong. Go back to the chat and say:
+
+> That file came through abbreviated. Send me the complete file again, with nothing
+> left out.
+
+Nothing was changed, so you can retry as often as you like.
+
+---
+
 ## One thing to know about the addresses
 
 Every link and image uses an address starting from the site root, like `/css/site.css` and
