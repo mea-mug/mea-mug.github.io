@@ -139,6 +139,12 @@ a:hover { color: var(--accent-soft); }
 
 h1, h2, h3, h4 { line-height: 1.18; font-weight: 700; letter-spacing: -.02em; }
 h1 { font-size: clamp(2.1rem, 5.4vw, 3.9rem); }
+/* A title meant to sit on a single line: it scales with the viewport instead
+   of wrapping, so it never breaks into two rows. */
+h1.oneline {
+  font-size: clamp(1.5rem, 4.4vw, 3rem);
+  white-space: nowrap; letter-spacing: -.025em;
+}
 h2 { font-size: clamp(1.65rem, 3.6vw, 2.6rem); }
 h3 { font-size: clamp(1.15rem, 2vw, 1.45rem); }
 
@@ -163,6 +169,13 @@ p { color: var(--text-soft); }
 }
 .skip-link:focus {
   width: auto; height: auto; overflow: visible; clip-path: none;
+}
+
+/* Present for screen readers and search engines, invisible on screen.
+   Clipped rather than display:none, which would hide it from them too. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; margin: -1px; padding: 0;
 }
 
 /* ---------- 3. Layout helpers -------------------------------------------- */
@@ -204,14 +217,27 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 
 .nav {
   display: flex; align-items: center; gap: 1rem;
-  min-height: 72px;
+  min-height: 72px; overflow: visible;
 }
 
-.brand { display: flex; align-items: center; gap: .7rem; margin-inline-end: auto; flex-shrink: 0; }
-.brand img { width: 42px; height: 42px; object-fit: contain; border-radius: 8px; background: #fff; padding: 3px; }
-.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand { display: flex; align-items: center; gap: .7rem; margin-inline-end: auto; min-width: 0; }
+.brand img { width: 42px; height: 42px; flex: none; object-fit: contain; border-radius: 8px; background: #fff; padding: 3px; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
 .brand-name { font-weight: 700; font-size: 1.06rem; letter-spacing: -.01em; color: var(--text); }
-.brand-sub { font-size: .68rem; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; }
+/* The full company name has to read in one piece, so it shrinks with the
+   viewport rather than being cut off or wrapping mid-word. */
+.brand-sub {
+  font-size: clamp(.56rem, 2.1vw, .68rem); color: var(--muted);
+  letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
+}
+/* On narrow phones there is not enough width for one line, so let the name
+   wrap and shrink the mark instead of ever cutting a word off. */
+@media (max-width: 460px) {
+  .brand img { width: 34px; height: 34px; }
+  .brand { gap: .5rem; }
+  .brand-name { font-size: .98rem; }
+  .brand-sub { white-space: normal; letter-spacing: .04em; line-height: 1.3; }
+}
 
 .nav-links { display: flex; align-items: center; gap: .3rem; list-style: none; }
 .nav-links a {
@@ -221,6 +247,21 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 }
 .nav-links a:hover { color: var(--text); background: var(--surface-2); }
 .nav-links a.active { color: var(--accent); font-weight: 600; }
+
+/* Contact is the one thing every visitor might need, so it is always shown
+   as a filled button rather than another plain link. */
+.nav-links a.nav-cta,
+.nav-links a.nav-cta.active {
+  background: var(--accent); color: var(--accent-ink);
+  font-weight: 700; border-radius: var(--radius-sm);
+  padding-inline: 1.05rem; margin-inline-start: .35rem;
+}
+.nav-links a.nav-cta:hover {
+  background: var(--accent-soft); color: var(--accent-ink);
+}
+@media (max-width: 900px) {
+  .nav-links a.nav-cta { margin-inline-start: 0; text-align: center; margin-block: .4rem; }
+}
 
 .nav-tools { display: flex; align-items: center; gap: .4rem; flex-shrink: 0; }
 
@@ -389,12 +430,22 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
   margin-bottom: 1.1rem;
 }
 
+/* "All" sits on its own centred row; the categories line up three to a row
+   so every label stays on one line. */
 .filter-bar {
-  display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
+  display: flex; flex-direction: column; align-items: center; gap: .6rem;
   margin-bottom: 2.2rem;
 }
+.filter-cats {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .5rem; width: 100%; max-width: 780px;
+}
+.filter-all { min-width: 128px; }
+@media (max-width: 700px) { .filter-cats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 430px) { .filter-cats { grid-template-columns: 1fr; } }
 .filter-btn {
-  padding: .6rem 1.15rem; border-radius: 100px;
+  padding: .6rem 1.15rem; border-radius: 100px; text-align: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   background: var(--surface); border: 1.5px solid var(--border);
   color: var(--text-soft); font-family: inherit; font-size: .87rem; font-weight: 600;
   cursor: pointer; transition: all var(--t-fast);
@@ -611,10 +662,14 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
   padding-block: clamp(2.5rem, 5vw, 4rem) 1.6rem; margin-top: auto;
 }
 .footer-grid {
-  display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.2rem;
-  margin-bottom: 2.4rem;
+  display: grid; grid-template-columns: 1.6fr auto; gap: 2.6rem;
+  margin-bottom: 2.4rem; align-items: start;
 }
-@media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; } }
+.footer-contact { justify-self: end; text-align: end; }
+@media (max-width: 760px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+  .footer-contact { justify-self: start; text-align: start; }
+}
 /* h2 rather than h4: the footer is its own landmark, and jumping straight
    from h2 to h4 would leave a gap in the heading outline. */
 .footer-grid h2 {

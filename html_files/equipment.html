@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Equipment — MEA, Mughrabi Engineering Agencies">
-<meta property="og:description" content="Six families of industrial machinery, supplied and manufactured.">
+<meta property="og:description" content="Six categories of industrial machinery, supplied and manufactured.">
 <meta property="og:image" content="/images/brand/04-social-share-preview-og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
       <img src="/images/brand/01-engineer-mohammed-said-mughrabi-logo-mea.jpg" alt="MEA logo" width="42" height="42">
       <span class="brand-text">
         <span class="brand-name" data-en="MEA" data-ar="المغربي">MEA</span>
-        <span class="brand-sub" data-en="Mughrabi Engineering" data-ar="الوكلاء الهندسيون">Mughrabi Engineering</span>
+        <span class="brand-sub" data-en="Mughrabi Engineering Agencies" data-ar="المغربي الوكلاء الهندسيون">Mughrabi Engineering Agencies</span>
       </span>
     </a>
     <ul class="nav-links" id="nav-links">
@@ -33,7 +33,7 @@
       <li><a href="/services" data-en="Services" data-ar="خدماتنا">Services</a></li>
       <li><a href="/equipment" class="active" data-en="Equipment" data-ar="المعدات">Equipment</a></li>
       <li><a href="/projects" data-en="Projects" data-ar="أعمالنا">Projects</a></li>
-      <li><a href="/contact" data-en="Contact" data-ar="إتصل بنا">Contact</a></li>
+      <li><a href="/contact" class="nav-cta" data-en="Contact" data-ar="إتصل بنا">Contact</a></li>
     </ul>
     <div class="nav-tools">
       <button class="icon-btn lang-btn" data-lang-toggle type="button">ع</button>
@@ -49,9 +49,8 @@
   <section class="hero">
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow" data-en="Equipment" data-ar="المعدات">Equipment</span>
-        <h1 data-en="What we supply and build" data-ar="ما نورّده و نصنعه">What we supply and build</h1>
-        <p class="lead" data-en="Filter by family, or tap any photo to see it full size. Everything here we have supplied, manufactured or installed." data-ar="صفِّ حسب العائلة، أو اضغط أي صورة لعرضها بالحجم الكامل. كل ما هنا قمنا بتوريده أو تصنيعه أو تركيبه.">Filter by family, or tap any photo to see it full size. Everything here we have supplied, manufactured or installed.</p>
+        <h1 class="oneline" data-en="What we supply and build" data-ar="ما نورّده و نصنعه">What we supply and build</h1>
+        <p class="lead" data-en="Filter by category, or tap any photo to see it full size. Everything here we have supplied, manufactured or installed." data-ar="صفِّ حسب الفئة، أو اضغط أي صورة لعرضها بالحجم الكامل. كل ما هنا قمنا بتوريده أو تصنيعه أو تركيبه.">Filter by category, or tap any photo to see it full size. Everything here we have supplied, manufactured or installed.</p>
       </div>
     </div>
   </section>
@@ -60,23 +59,25 @@
     <div class="wrap">
 
       <!-- ============================ FILTERS ============================ -->
-      <h2 class="section-sub" data-en="Browse by family" data-ar="تصفّح حسب العائلة">Browse by family</h2>
+      <h2 class="section-sub" data-en="Browse by category" data-ar="تصفّح حسب الفئة">Browse by category</h2>
 
       <div class="filter-bar" role="group" aria-label="Filter equipment by category">
-        <button class="filter-btn active" data-filter="all" aria-pressed="true"
+        <button class="filter-btn filter-all active" data-filter="all" aria-pressed="true"
                 data-en="All" data-ar="الكل">All</button>
-        <button class="filter-btn" data-filter="concrete" aria-pressed="false"
-                data-en="Concrete &amp; construction" data-ar="الخرسانة و الإنشاءات">Concrete &amp; construction</button>
-        <button class="filter-btn" data-filter="machine-tools" aria-pressed="false"
-                data-en="Machine tools &amp; CNC" data-ar="آلات التشغيل و CNC">Machine tools &amp; CNC</button>
-        <button class="filter-btn" data-filter="food" aria-pressed="false"
-                data-en="Food lines" data-ar="خطوط الغذاء">Food lines</button>
-        <button class="filter-btn" data-filter="plastics" aria-pressed="false"
-                data-en="Plastics, printing &amp; paper" data-ar="البلاستيك و الطباعة و الورق">Plastics, printing &amp; paper</button>
-        <button class="filter-btn" data-filter="water" aria-pressed="false"
-                data-en="Water &amp; environment" data-ar="المياه و البيئة">Water &amp; environment</button>
-        <button class="filter-btn" data-filter="heavy" aria-pressed="false"
-                data-en="Heavy equipment" data-ar="المعدات الثقيلة">Heavy equipment</button>
+        <div class="filter-cats">
+          <button class="filter-btn" data-filter="concrete" aria-pressed="false"
+                  data-en="Concrete &amp; construction" data-ar="الخرسانة و الإنشاءات">Concrete &amp; construction</button>
+          <button class="filter-btn" data-filter="machine-tools" aria-pressed="false"
+                  data-en="Machine tools &amp; CNC" data-ar="آلات التشغيل و CNC">Machine tools &amp; CNC</button>
+          <button class="filter-btn" data-filter="food" aria-pressed="false"
+                  data-en="Food lines" data-ar="خطوط الغذاء">Food lines</button>
+          <button class="filter-btn" data-filter="plastics" aria-pressed="false"
+                  data-en="Plastics, printing &amp; paper" data-ar="البلاستيك و الطباعة و الورق">Plastics, printing &amp; paper</button>
+          <button class="filter-btn" data-filter="water" aria-pressed="false"
+                  data-en="Water &amp; environment" data-ar="المياه و البيئة">Water &amp; environment</button>
+          <button class="filter-btn" data-filter="heavy" aria-pressed="false"
+                  data-en="Heavy equipment" data-ar="المعدات الثقيلة">Heavy equipment</button>
+        </div>
       </div>
 
       <!-- ============================ CATALOGUE ============================ -->
@@ -550,7 +551,7 @@
         <p class="lead" data-en="This is a sample of what we have delivered, not a catalogue limit. If it is industrial, ask us." data-ar="هذه عيّنة مما نفّذناه، و ليست حدوداً لما نقدّمه. إن كان صناعياً، فاسألنا.">This is a sample of what we have delivered, not a catalogue limit. If it is industrial, ask us.</p>
       </div>
       <div class="btn-row reveal" style="justify-content:center">
-        <a class="btn btn-primary btn-lg" href="/contact" data-en="Request a quote" data-ar="اطلب عرض سعر">Request a quote</a>
+        <a class="btn btn-primary btn-lg" href="/contact" data-en="Contact" data-ar="للتواصل">Contact</a>
       </div>
     </div>
   </section>
@@ -571,24 +572,13 @@
     <div class="footer-grid">
       <div class="footer-about">
         <h2 data-en="MEA — Mughrabi Engineering Agencies" data-ar="المغربي الوكلاء الهندسيون">MEA — Mughrabi Engineering Agencies</h2>
-        <p data-en="Industrial engineering, design and production." data-ar="الهندسة الصناعية، التصميم و الإنتاج.">Industrial engineering, design and production.</p>
+        <p data-en="Industrial engineering, design and production. Based in Germany." data-ar="الهندسة الصناعية، التصميم و الإنتاج. نحن في ألمانيا.">Industrial engineering, design and production. Based in Germany.</p>
       </div>
-      <div>
-        <h2 data-en="Pages" data-ar="الصفحات">Pages</h2>
-        <ul class="footer-links">
-          <li><a href="/about" data-en="About" data-ar="لمحة عنا">About</a></li>
-          <li><a href="/services" data-en="Services" data-ar="خدماتنا">Services</a></li>
-          <li><a href="/equipment" data-en="Equipment" data-ar="المعدات">Equipment</a></li>
-          <li><a href="/projects" data-en="Projects" data-ar="أعمالنا">Projects</a></li>
-          <li><a href="/contact" data-en="Contact" data-ar="إتصل بنا">Contact</a></li>
-        </ul>
-      </div>
-      <div>
+      <div class="footer-contact">
         <h2 data-en="Get in touch" data-ar="تواصل معنا">Get in touch</h2>
         <ul class="footer-links">
           <li><a href="mailto:eng.m.s.mughrabi@gmail.com" class="ltr">eng.m.s.mughrabi@gmail.com</a></li>
           <li><a href="tel:+491774648243" class="ltr">+49 177 464 8243</a></li>
-          <li><a href="https://www.facebook.com/ingenieurwesen.industrie.7" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>
     </div>
