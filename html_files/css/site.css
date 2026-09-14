@@ -114,7 +114,7 @@
   --shadow:    0 4px 20px rgba(20, 30, 50, .1);
   --shadow-lg: 0 18px 46px rgba(20, 30, 50, .16);
 
-  color-scheme: light;
+    color-scheme: light;
 }
 
 /* ---------- 2. Reset & base ---------------------------------------------- */
@@ -220,23 +220,58 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
   min-height: 72px; overflow: visible;
 }
 
-.brand { display: flex; align-items: center; gap: .7rem; margin-inline-end: auto; min-width: 0; }
-.brand img { width: 42px; height: 42px; flex: none; object-fit: contain; border-radius: 8px; background: #fff; padding: 3px; }
-.brand-text { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
-.brand-name { font-weight: 700; font-size: 1.06rem; letter-spacing: -.01em; color: var(--text); }
-/* The full company name has to read in one piece, so it shrinks with the
-   viewport rather than being cut off or wrapping mid-word. */
-.brand-sub {
-  font-size: clamp(.56rem, 2.1vw, .68rem); color: var(--muted);
-  letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
+/* Brand container */
+.brand {
+  display: flex; align-items: center; gap: .85rem;
+  margin-inline-end: auto; min-width: 0; text-decoration: none;
 }
-/* On narrow phones there is not enough width for one line, so let the name
-   wrap and shrink the mark instead of ever cutting a word off. */
+.brand img {
+  width: 44px; height: 44px; flex: none; object-fit: contain;
+  border-radius: 10px; background: #fff; padding: 3px;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+  transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+}
+.brand:hover img {
+  transform: translateY(-1px) scale(1.04);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* Precision vertical accent divider */
+.brand-divider {
+  width: 2px; height: 26px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-soft));
+  border-radius: 2px; flex: none; opacity: .85;
+  transition: transform var(--t), opacity var(--t), box-shadow var(--t);
+}
+.brand:hover .brand-divider {
+  opacity: 1; transform: scaleY(1.18);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Prominent, attractive brand title */
+.brand-title {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 700; letter-spacing: -.02em;
+  color: var(--text); line-height: 1.2;
+  transition: color var(--t-fast), text-shadow var(--t-fast);
+}
+.brand:hover .brand-title {
+  color: var(--accent-soft);
+}
+:root[data-theme="light"] .brand:hover .brand-title {
+  color: var(--accent);
+}
+:root:not([data-theme="light"]) .brand:hover .brand-title {
+  text-shadow: 0 0 18px var(--accent-glow);
+}
+
 @media (max-width: 460px) {
-  .brand img { width: 34px; height: 34px; }
-  .brand { gap: .5rem; }
-  .brand-name { font-size: .98rem; }
-  .brand-sub { white-space: normal; letter-spacing: .04em; line-height: 1.3; }
+  .brand img { width: 36px; height: 36px; border-radius: 8px; }
+  .brand-divider { height: 20px; }
+  .brand { gap: .55rem; }
+  .brand-title { font-size: .92rem; line-height: 1.25; }
 }
 
 .nav-links { display: flex; align-items: center; gap: .3rem; list-style: none; }
@@ -723,6 +758,17 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 [dir="rtl"] .ticks li::before { content: '◂'; }
 /* Latin fragments (e-mail, phone, URLs) must stay left-to-right inside Arabic text. */
 [dir="rtl"] .ltr { direction: ltr; display: inline-block; unicode-bidi: embed; }
+
+[dir="rtl"] .brand-title {
+  font-family: var(--font-ar);
+  font-size: clamp(1.12rem, 2.2vw, 1.34rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+@media (max-width: 460px) {
+  [dir="rtl"] .brand-title { font-size: .98rem; }
+}
 
 /* ---------- 14. Print --------------------------------------------------------- */
 @media print {
