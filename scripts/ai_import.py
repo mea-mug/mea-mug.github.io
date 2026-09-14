@@ -220,8 +220,11 @@ def main():
     say('Rebuilding the site...')
     sys.path.insert(0, os.path.join(ROOT, 'scripts'))
     os.chdir(ROOT)
-    rc = os.system('python "%s" html_files _site unlisted' %
-                   os.path.join(ROOT, 'scripts', 'build_index.py'))
+    # Called directly rather than through os.system, so no command interpreter
+    # ever parses the folder path (a name containing & would break it).
+    import subprocess
+    rc = subprocess.call([sys.executable, os.path.join(ROOT, 'scripts', 'build_index.py'),
+                          'html_files', '_site', 'unlisted'], cwd=ROOT)
     if rc != 0:
         say('The build reported a problem. Your previous files are in _ai-backups.')
         return 1

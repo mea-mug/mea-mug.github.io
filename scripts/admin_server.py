@@ -504,7 +504,12 @@ class Admin(BaseHTTPRequestHandler):
                 self._json({'ok': False, 'output': 'PUBLISH.bat is missing from this folder.'})
                 return
             # PUBLISH.bat ends with "pause"; feeding it no stdin lets it finish on its own.
-            rc, out = run(['cmd', '/c', bat])
+            # Run it from inside the kit folder as .\PUBLISH.bat. Handing cmd the
+            # full path breaks when a folder name contains & or similar: cmd reads
+            # the & as "start another command" and chops the path apart. The .\
+            # matters too - some Windows setups stop cmd finding a bare file name
+            # in the current folder.
+            rc, out = run(['cmd', '/d', '/c', '.\\PUBLISH.bat'], cwd=ROOT)
             out = re.sub(r'Press any key to close this window\.?', '', out).strip()
             self._json({'ok': rc == 0, 'output': out or '(no output)'})
             return
