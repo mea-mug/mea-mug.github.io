@@ -4,6 +4,8 @@ The new MEA website, built into this kit and ready to publish. For the publishin
 setup (GitHub account, token, `PUBLISH.bat`), read **START-HERE.md** — that guide is
 unchanged. This file only covers the website itself.
 
+> Moving to another computer, or working from two? Read **SETUP-ANOTHER-COMPUTER.md**.
+
 > Do not put your notes in `README.md`. It is rewritten from scratch on every publish.
 
 ---
