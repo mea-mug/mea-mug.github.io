@@ -488,6 +488,8 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 .empty-note.show { display: block; }
 
 /* ---------- 9. Gallery & lightbox ------------------------------------------ */
+[data-lightbox] { cursor: zoom-in; }
+
 .gallery { columns: 3 260px; column-gap: 1.1rem; }
 .gallery figure {
   break-inside: avoid; margin-bottom: 1.1rem; position: relative;
