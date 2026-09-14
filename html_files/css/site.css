@@ -55,7 +55,7 @@
   --gut: clamp(1rem, 4vw, 2.5rem);
 
   --font: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-ar: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+  --font-ar: 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   --t-fast: .16s ease;
   --t: .28s cubic-bezier(.4, 0, .2, 1);
@@ -717,8 +717,8 @@ section.tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
 /* body carries its own font-family, so it must be named explicitly here. */
 [dir="rtl"] body,
 [dir="rtl"] input, [dir="rtl"] textarea, [dir="rtl"] button { font-family: var(--font-ar); }
-[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 { letter-spacing: 0; line-height: 1.4; }
-[dir="rtl"] body { line-height: 1.9; }
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 { letter-spacing: 0; line-height: 1.35; }
+[dir="rtl"] body { line-height: 1.8; }
 [dir="rtl"] .eyebrow { letter-spacing: 0; }
 [dir="rtl"] .ticks li::before { content: '◂'; }
 /* Latin fragments (e-mail, phone, URLs) must stay left-to-right inside Arabic text. */
